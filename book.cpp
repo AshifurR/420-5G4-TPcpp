@@ -48,3 +48,46 @@ void Book: :setAvailability(bool available) {
 void Book: :setBorrowerId(const string& borrowerId) {
     this->borrowerId = borrowerId
 }
+
+void Book: :checkOut(const string& borrowerId) {
+    isAvailable = false;
+    this->borrowerId = borrowerId;
+}
+
+void Book: :returnBook() {
+    isAvailable = true;
+    borrowerId = ""
+}
+
+string Book: :toString() const {
+    string affichage = "Title: " + title + "\nAuthor: " + author + "\nISBN: " + isbn;
+    if (isAvailable) {
+        affichage += " | Available";
+    }else {
+        affichage += " | Borrowed by : " + borrowerId
+    }
+    return affichage
+}
+
+string Book : :toFileFormat() const {
+    string resultat = title + "|" + author + "|" + isbn + "|"
+    if (isAvailable) {
+        resultat += "1";
+    } else {
+        resultat += "0";
+    }
+    resultat += "|" + borrowerId;
+    return resultat;
+}
+
+void Book: :fromFileFormat(const string& line) {
+    stringstream ss(line);
+    string availability;
+
+    getline(ss, title, '|');
+    getline(ss, author, '|');
+    getline(ss, isbn, '|');
+    getline(ss, availability, '|');
+    isAvailable = (availability == "1");
+    getline(ss, borrowerId);
+}
