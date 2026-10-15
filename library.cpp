@@ -180,6 +180,16 @@ void Library::displayAvailableBooks() {
         cout << "Aucun livre disponible pour emprunt.\n";
         return;
     }
+
+    sort(available.begin(), available.end(), [] (Book* a, Book* b) {
+        bool resultat;
+        if (a->getTitle() == b->getTitle()){
+            resultat = a->getAuthor() < b->getAuthor();
+        } else {
+            resultat = a->getTitle() < b->getTitle();
+        }
+        return resultat;
+    });
     
     cout << "\n=== LIVRES DISPONIBLES ===\n";
     for (size_t i = 0; i < available.size(); ++i) {

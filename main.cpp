@@ -258,8 +258,12 @@ int main(int argc, char* argv[]) {
             }
             
             case 0: // Exit
-                cout << "Sauvegarde des données avant la fermeture...\n";
-                fileManager.saveLibraryData(library);
+                if (dataDir.empty()) {
+                    cout << "Pas de répertoire de données spécifié. Les données ne sont pas sauvegardées.\n";
+                } else {
+                    cout << "Sauvegarde des données avant la fermeture...\n";
+                    fileManager.saveLibraryData(library);
+                }
                 cout << "Merci d'avoir utilisé le Système de Gestion de Bibliothèque Personnelle !\n";
                 running = false;
                 break;
@@ -270,6 +274,5 @@ int main(int argc, char* argv[]) {
                 break;
         }
     }
-    
     return 0;
 }
