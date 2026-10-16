@@ -40,4 +40,4 @@ Pensées|Blaise Pascal|9782070380994|0|USR014
 Lettres persanes|Montesquieu|9782070381001|1|
 De l'esprit des lois|Montesquieu|9782070381018|1|
 hARRY Potter|jk rowling|0987654321|0|USR027
-Formatage|TP|111|0|USR027
+Formatage|TP|111|1|
