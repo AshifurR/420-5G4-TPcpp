@@ -87,6 +87,8 @@ int main(int argc, char* argv[]) {
 
     string booksFile;
     string usersFile;
+    string fichierJournal;
+
     if (!dataDir.empty()) {
         if (!filesystem::is_directory(dataDir)) {
             cerr << "Erreur : le répertoire " << dataDir << " n'existe pas.\n";
@@ -95,18 +97,7 @@ int main(int argc, char* argv[]) {
         }
         booksFile = (filesystem::path(dataDir) / "books.txt").string();
         usersFile = (filesystem::path(dataDir) / "users.txt").string();
-    }
-
-    string fichierJournal = "journal.txt";
-
-    if (!dataDir.empty()) {
-        fichierJournal = dataDir + "/journal.txt";
-    }
-    ofstream journal(fichierJournal, ios::app);
-    if (journal.is_open()) {
-        journal.close();
-    } else {
-        cout << "Erreur : Impossible de créer le journal d'activités" << endl;
+        fichierJournal = (filesystem::path(dataDir) / "journal.txt").string();
     }
 
     Library library;
@@ -298,16 +289,11 @@ int main(int argc, char* argv[]) {
             }
             
             case 0: // Exit
-                if (dataDir.empty()) {
-                    cout << "Pas de répertoire de données spécifié. Les données ne sont pas sauvegardées.\n";
-                } else {
-                    cout << "Sauvegarde des données avant la fermeture...\n";
-                    fileManager.saveLibraryData(library);
-                }
+                cout << "Sauvegarde des données avant la fermeture...\n";
+                fileManager.saveLibraryData(library);
                 cout << "Merci d'avoir utilisé le Système de Gestion de Bibliothèque Personnelle !\n";
                 running = false;
                 break;
-            
             default:
                 cout << "Choix invalide. Veuillez réessayer.\n";
                 pauseForInput();
